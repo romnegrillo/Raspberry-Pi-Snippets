@@ -4,9 +4,11 @@
 #include <QMessageBox>
 #include <QDialog>
 #include "confirm_switch_network.h"
+#include <QNetworkConfigurationManager>
+#include <QTimer>
+#include <QNetworkAccessManager>
 
 int previous_clicked = false;
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,6 +22,10 @@ MainWindow::MainWindow(QWidget *parent) :
     if(this->current_value == 0)
     {
         this->show_wifi_info();
+
+        QTimer *timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(update_wifi_list()));
+        timer->start(5000);
     }
     else
     {
@@ -47,7 +53,7 @@ void MainWindow::on_horizontalSlider_valueChanged(int next_value)
             if (confirm_switch_network_obj->exec())
             {
                 this->current_value = next_value;
-                 qDebug() << "Called";
+                qDebug() << "Called";
             }
             else
             {
@@ -56,7 +62,7 @@ void MainWindow::on_horizontalSlider_valueChanged(int next_value)
         }
         else
         {
-              previous_clicked = false;
+            previous_clicked = false;
         }
     }
 
@@ -80,7 +86,7 @@ void MainWindow::on_horizontalSlider_valueChanged(int next_value)
         }
         else
         {
-              previous_clicked = false;
+            previous_clicked = false;
         }
     }
 
@@ -100,11 +106,40 @@ void MainWindow::on_horizontalSlider_valueChanged(int next_value)
 void MainWindow::show_wifi_info()
 {
     ui->wif_list_groupbox->setVisible(true);
+
+    ui->wifi_list->clear();
+
+    QNetworkConfigurationManager nwkMgr;
+
+    nwkMgr.updateConfigurations();
+
+
+    // UPDATE this code needs to run in the slot for QNetworkManager::updateCompleted signal
+    QList<QNetworkConfiguration> nwkCnfList = nwkMgr.allConfigurations();
+
+    for(int i=0; i<nwkCnfList.length(); i++)
+    {
+        if (nwkCnfList[i].bearerType() == QNetworkConfiguration::BearerWLAN)
+        {
+
+            ui->wifi_list->addItem(QString::fromUtf8(" ✓ ") +  nwkCnfList[i].name());
+
+        }
+    }
 }
+
 
 void MainWindow::show_hotspot_info()
 {
     ui->wif_list_groupbox->setVisible(false);
 }
+
+void MainWindow::update_wifi_list()
+{
+    this->show_wifi_info();
+}
+
+
+
 
 

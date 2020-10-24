@@ -25,8 +25,7 @@ private slots:
     void on_horizontalSlider_valueChanged(int value);
     void show_wifi_info();
     void show_hotspot_info();
-
-
+    void update_wifi_list();
 
 
 
