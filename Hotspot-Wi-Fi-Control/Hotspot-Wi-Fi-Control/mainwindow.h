@@ -26,8 +26,11 @@ private slots:
     void show_wifi_info();
     void show_hotspot_info();
     void update_wifi_list();
+    void connect_selected_wifi();
 
 
+
+    void on_connect_button_clicked();
 
 private:
     Ui::MainWindow *ui;

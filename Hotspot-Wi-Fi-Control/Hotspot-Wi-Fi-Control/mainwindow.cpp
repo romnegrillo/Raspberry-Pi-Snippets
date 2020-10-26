@@ -8,6 +8,10 @@
 #include <QTimer>
 #include <QNetworkAccessManager>
 
+#include <QCoreApplication>
+
+#include <QKeyEvent>
+
 int previous_clicked = false;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -41,6 +45,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_horizontalSlider_valueChanged(int next_value)
 {
     // this->current_value is read from the constructor in the config file.
+    // at the constructor.
 
     // Transition from wifi mode to hotspot mode.
     if(this->current_value == 0 && next_value == 1)
@@ -53,7 +58,6 @@ void MainWindow::on_horizontalSlider_valueChanged(int next_value)
             if (confirm_switch_network_obj->exec())
             {
                 this->current_value = next_value;
-                qDebug() << "Called";
             }
             else
             {
@@ -77,7 +81,7 @@ void MainWindow::on_horizontalSlider_valueChanged(int next_value)
             if (confirm_switch_network_obj->exec())
             {
                 this->current_value = next_value;
-                qDebug() << "Called";
+
             }
             else
             {
@@ -113,7 +117,6 @@ void MainWindow::show_wifi_info()
 
     nwkMgr.updateConfigurations();
 
-
     // UPDATE this code needs to run in the slot for QNetworkManager::updateCompleted signal
     QList<QNetworkConfiguration> nwkCnfList = nwkMgr.allConfigurations();
 
@@ -121,9 +124,8 @@ void MainWindow::show_wifi_info()
     {
         if (nwkCnfList[i].bearerType() == QNetworkConfiguration::BearerWLAN)
         {
-
-            ui->wifi_list->addItem(QString::fromUtf8(" ✓ ") +  nwkCnfList[i].name());
-
+            //QString::fromUtf8(" ✓ ");
+            ui->wifi_list->addItem(nwkCnfList[i].name());
         }
     }
 }
@@ -139,7 +141,15 @@ void MainWindow::update_wifi_list()
     this->show_wifi_info();
 }
 
+void MainWindow::connect_selected_wifi()
+{
+    QString selected_SSID =  ui->wifi_list->currentItem()->text();
+
+    qDebug() << selected_SSID;
+}
 
 
-
-
+void MainWindow::on_connect_button_clicked()
+{
+    this->connect_selected_wifi();
+}

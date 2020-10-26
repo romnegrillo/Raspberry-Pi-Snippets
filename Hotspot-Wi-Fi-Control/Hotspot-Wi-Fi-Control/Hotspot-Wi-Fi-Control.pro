@@ -24,14 +24,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    enter_wifi_password.cpp \
         main.cpp \
         mainwindow.cpp \
     confirm_switch_network.cpp
 
 HEADERS += \
+    enter_wifi_password.h \
         mainwindow.h \
     confirm_switch_network.h
 
 FORMS += \
+    enter_wifi_password.ui \
         mainwindow.ui \
     confirm_switch_network.ui
