@@ -1,6 +1,7 @@
 #include "enter_wifi_password.h"
 #include "ui_enter_wifi_password.h"
-
+#include <QFile>
+#include <QTextStream>
 
 enter_wifi_password::enter_wifi_password(QWidget *parent, QString selected_SSID) :
     QDialog(parent),
@@ -90,4 +91,85 @@ void enter_wifi_password::on_ok_button_clicked()
 void enter_wifi_password::on_cancel_button_clicked()
 {
     this->close();
+}
+
+void enter_wifi_password::saveToApSetup(QString ssid, QString passphrase)
+{
+    QFile file("/home/pi/wifisetup.sh");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    { //you can send a message or throw error signal here
+        return;
+    }
+    QTextStream in(&file);
+    QString strLine = QString("");
+    QStringList line;
+    while (!in.atEnd())
+    {
+        int startPos1 = 0;
+        int startPos2 = 0;
+        strLine = in.readLine();
+        startPos1 = strLine.indexOf("ssid=\"", 0, Qt::CaseInsensitive);
+        if (startPos1 >= 0)
+        {
+            line.append("ssid=\"" + ssid+"\"");
+        }
+        startPos2 = strLine.indexOf("psk=\"", 0, Qt::CaseInsensitive);
+        if (startPos2 >= 0)
+        {
+            line.append("psk=\"" + passphrase+"\"");
+        }
+        if ((startPos1 < 0) && (startPos2 < 0))
+        {
+            line.append(strLine);
+        }
+    }
+    file.close();
+    QFile fileOut("wifisetup_temp.sh");
+    if (fileOut.open(QFile::WriteOnly | QFile::Text))
+    {
+        QTextStream s(&fileOut);
+        for (int i = 0; i < line.size(); ++i)
+          s << line.at(i) << '\n';
+    }
+    fileOut.close();
+}
+
+QString enter_wifi_password::getWifSetupValue(QString param)
+{
+    QString retValue = "";
+    QFile file("/home/pi/wifisetup.sh");
+    QString line = QString("");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        return QString("");
+    }
+    QTextStream in(&file);
+    while(!in.atEnd())
+    {
+        line = in.readLine();
+        int startPos = 0;
+        int lastPos = 0;
+        if (param == "SSID")
+        {
+            startPos = line.indexOf("ssid=", 0, Qt::CaseInsensitive);
+            lastPos = line.lastIndexOf("\"");
+            if (startPos >= 0)
+            {
+                retValue = line.mid(startPos+6,lastPos-1);
+            }
+        }
+        else
+        {
+            startPos = line.indexOf("psk=", 0, Qt::CaseInsensitive);
+            lastPos = line.lastIndexOf("\"");
+            if (startPos >= 0)
+            {
+                retValue = line.mid(startPos+5, lastPos-1);
+            }
+        }
+        if (retValue != QString(""))
+            break;
+    }
+    file.close();
+    return retValue;
 }

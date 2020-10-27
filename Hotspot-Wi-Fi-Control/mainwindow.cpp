@@ -7,6 +7,8 @@
 #include <QNetworkConfigurationManager>
 #include <QTimer>
 #include "enter_wifi_password.h"
+#include <QFile>
+#include <QTextStream>
 
 int previous_clicked = false;
 
@@ -152,4 +154,100 @@ void MainWindow::connect_selected_wifi()
 void MainWindow::on_connect_button_clicked()
 {
     this->connect_selected_wifi();
+}
+
+void MainWindow::saveToApSetup(QString ssid, QString passphrase)
+{
+    /*
+     This function accepts ssid and password for the hotspot
+     and replaces the current ssid and password.
+
+     A reboot is required for it to take effect as of the moment.
+    */
+
+    QFile file("/home/pi/apsetup.sh");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    { //you can send a message or throw error signal here
+        return;
+    }
+    QTextStream in(&file);
+    QString strLine = QString("");
+    QStringList line;
+    while (!in.atEnd())
+    {
+        int startPos1 = 0;
+        int startPos2 = 0;
+        strLine = in.readLine();
+        startPos1 = strLine.indexOf("ssid=", 0, Qt::CaseInsensitive);
+        if (startPos1 >= 0)
+        {
+            line.append("ssid=" + ssid);
+        }
+        startPos2 = strLine.indexOf("wpa_passphrase=", 0, Qt::CaseInsensitive);
+        if (startPos2 >= 0)
+        {
+            line.append("wpa_passphrase=" + passphrase);
+        }
+        if ((startPos1 < 0) && (startPos2 < 0))
+        {
+            line.append(strLine);
+        }
+    }
+    file.close();
+    QFile fileOut("apsetup_temp.sh");
+    if (fileOut.open(QFile::WriteOnly | QFile::Text))
+    {
+        QTextStream s(&fileOut);
+        for (int i = 0; i < line.size(); ++i)
+          s << line.at(i) << '\n';
+    }
+    fileOut.close();
+}
+
+QString MainWindow::getApSetupValue(QString param)
+{
+    /*
+     This function accepts a key that will be read
+     inside the apsetup.sh and returns the value of that key.
+
+     Example:
+        QString strSSID = getApSetupValue("SSID");
+        QString strPassPhrase = getApSetupValue("Passphrase");
+
+     A reboot is required for it to take effect as of the moment.
+    */
+
+    QString retValue = "";
+    QFile file("/home/pi/apsetup.sh");
+    QString line = QString("");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        return QString("");
+    }
+    QTextStream in(&file);
+    while(!in.atEnd())
+    {
+        line = in.readLine();
+        int startPos = 0;
+        if (param == "SSID")
+        {
+            startPos = line.indexOf("ssid=", 0, Qt::CaseInsensitive);
+            if (startPos >= 0)
+            {
+                retValue = line.mid(startPos+5);
+            }
+        }
+        else
+        {
+            startPos = line.indexOf("wpa_passphrase=", 0, Qt::CaseInsensitive);
+            if (startPos >= 0)
+            {
+                retValue = line.mid(startPos+15);
+            }
+        }
+        if (retValue != QString(""))
+            break;
+    }
+    file.close();
+    return retValue;
 }

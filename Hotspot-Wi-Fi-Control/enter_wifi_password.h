@@ -17,6 +17,9 @@ public:
 
     QString entered_password;
     void show_keyboard_group(QString group);
+    void saveToApSetup(QString ssid, QString passphrase);
+    QString getWifSetupValue(QString param);
+
 private slots:
     void on_abc_button_clicked();
 
