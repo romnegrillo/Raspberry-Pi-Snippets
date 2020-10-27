@@ -16,6 +16,7 @@
 #include <QtGui/QGroupBox>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
+#include <QtGui/QLineEdit>
 #include <QtGui/QListWidget>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenuBar>
@@ -35,10 +36,18 @@ public:
     QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
-    QLabel *label_4;
+    QLabel *ip_address_label;
     QGroupBox *wif_list_groupbox;
     QListWidget *wifi_list;
     QPushButton *connect_button;
+    QGroupBox *hotspot_info_groupbox;
+    QPushButton *connect_button_2;
+    QLineEdit *hotspot_ssid_textbox;
+    QLineEdit *hotspot_password_textbox;
+    QLabel *label_4;
+    QLabel *label_5;
+    QLabel *label_6;
+    QLineEdit *hotspot_password_textbox_2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -82,9 +91,9 @@ public:
         label_3 = new QLabel(centralWidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(280, 70, 101, 41));
-        label_4 = new QLabel(centralWidget);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setGeometry(QRect(390, 70, 121, 41));
+        ip_address_label = new QLabel(centralWidget);
+        ip_address_label->setObjectName(QString::fromUtf8("ip_address_label"));
+        ip_address_label->setGeometry(QRect(390, 70, 121, 41));
         wif_list_groupbox = new QGroupBox(centralWidget);
         wif_list_groupbox->setObjectName(QString::fromUtf8("wif_list_groupbox"));
         wif_list_groupbox->setGeometry(QRect(40, 110, 721, 311));
@@ -94,6 +103,30 @@ public:
         connect_button = new QPushButton(wif_list_groupbox);
         connect_button->setObjectName(QString::fromUtf8("connect_button"));
         connect_button->setGeometry(QRect(610, 260, 93, 28));
+        hotspot_info_groupbox = new QGroupBox(centralWidget);
+        hotspot_info_groupbox->setObjectName(QString::fromUtf8("hotspot_info_groupbox"));
+        hotspot_info_groupbox->setGeometry(QRect(40, 110, 721, 311));
+        connect_button_2 = new QPushButton(hotspot_info_groupbox);
+        connect_button_2->setObjectName(QString::fromUtf8("connect_button_2"));
+        connect_button_2->setGeometry(QRect(610, 260, 93, 28));
+        hotspot_ssid_textbox = new QLineEdit(hotspot_info_groupbox);
+        hotspot_ssid_textbox->setObjectName(QString::fromUtf8("hotspot_ssid_textbox"));
+        hotspot_ssid_textbox->setGeometry(QRect(340, 90, 191, 22));
+        hotspot_password_textbox = new QLineEdit(hotspot_info_groupbox);
+        hotspot_password_textbox->setObjectName(QString::fromUtf8("hotspot_password_textbox"));
+        hotspot_password_textbox->setGeometry(QRect(340, 130, 191, 22));
+        label_4 = new QLabel(hotspot_info_groupbox);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(180, 100, 131, 20));
+        label_5 = new QLabel(hotspot_info_groupbox);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setGeometry(QRect(180, 130, 131, 20));
+        label_6 = new QLabel(hotspot_info_groupbox);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setGeometry(QRect(180, 170, 131, 20));
+        hotspot_password_textbox_2 = new QLineEdit(hotspot_info_groupbox);
+        hotspot_password_textbox_2->setObjectName(QString::fromUtf8("hotspot_password_textbox_2"));
+        hotspot_password_textbox_2->setGeometry(QRect(340, 170, 191, 22));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -117,9 +150,16 @@ public:
         label->setText(QApplication::translate("MainWindow", "Wi-Fi Mode", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "Hotspot Mode", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "IP Address:", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("MainWindow", "192.168.4.1", 0, QApplication::UnicodeUTF8));
+        ip_address_label->setText(QApplication::translate("MainWindow", "10.0.0.1", 0, QApplication::UnicodeUTF8));
         wif_list_groupbox->setTitle(QApplication::translate("MainWindow", "Wi-Fi Networks", 0, QApplication::UnicodeUTF8));
         connect_button->setText(QApplication::translate("MainWindow", "Connect", 0, QApplication::UnicodeUTF8));
+        hotspot_info_groupbox->setTitle(QApplication::translate("MainWindow", "Hotspot Information", 0, QApplication::UnicodeUTF8));
+        connect_button_2->setText(QApplication::translate("MainWindow", "Update", 0, QApplication::UnicodeUTF8));
+        hotspot_ssid_textbox->setText(QApplication::translate("MainWindow", "G3D-T2000", 0, QApplication::UnicodeUTF8));
+        hotspot_password_textbox->setText(QApplication::translate("MainWindow", "G3D-T2000", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("MainWindow", "Hotspot SSID", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("MainWindow", "Hotspot Password:", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("MainWindow", "Confirm Password:", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

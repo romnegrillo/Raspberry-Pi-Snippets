@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../Hotspot-Wi-Fi-Control/confirm_switch_network.h"
+#include "../../confirm_switch_network.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'confirm_switch_network.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63

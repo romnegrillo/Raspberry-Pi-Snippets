@@ -99,7 +99,7 @@ QSlider::handle:horizontal {
      <string>IP Address:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="ip_address_label">
     <property name="geometry">
      <rect>
       <x>390</x>
@@ -109,7 +109,7 @@ QSlider::handle:horizontal {
      </rect>
     </property>
     <property name="text">
-     <string>192.168.4.1</string>
+     <string>10.0.0.1</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="wif_list_groupbox">
@@ -145,6 +145,107 @@ QSlider::handle:horizontal {
      </property>
      <property name="text">
       <string>Connect</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="hotspot_info_groupbox">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>110</y>
+      <width>721</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Hotspot Information</string>
+    </property>
+    <widget class="QPushButton" name="connect_button_2">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>260</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Update</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="hotspot_ssid_textbox">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>90</y>
+       <width>191</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>G3D-T2000</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="hotspot_password_textbox">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>130</y>
+       <width>191</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>G3D-T2000</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>100</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hotspot SSID</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>130</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hotspot Password:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>170</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Confirm Password:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="hotspot_password_textbox_2">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>170</y>
+       <width>191</width>
+       <height>22</height>
+      </rect>
      </property>
     </widget>
    </widget>

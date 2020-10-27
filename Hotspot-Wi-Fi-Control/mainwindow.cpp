@@ -6,11 +6,7 @@
 #include "confirm_switch_network.h"
 #include <QNetworkConfigurationManager>
 #include <QTimer>
-#include <QNetworkAccessManager>
-
-#include <QCoreApplication>
-
-#include <QKeyEvent>
+#include "enter_wifi_password.h"
 
 int previous_clicked = false;
 
@@ -110,21 +106,19 @@ void MainWindow::on_horizontalSlider_valueChanged(int next_value)
 void MainWindow::show_wifi_info()
 {
     ui->wif_list_groupbox->setVisible(true);
-
+    ui->hotspot_info_groupbox->setVisible(false);
     ui->wifi_list->clear();
 
     QNetworkConfigurationManager nwkMgr;
 
     nwkMgr.updateConfigurations();
 
-    // UPDATE this code needs to run in the slot for QNetworkManager::updateCompleted signal
     QList<QNetworkConfiguration> nwkCnfList = nwkMgr.allConfigurations();
 
     for(int i=0; i<nwkCnfList.length(); i++)
     {
         if (nwkCnfList[i].bearerType() == QNetworkConfiguration::BearerWLAN)
         {
-            //QString::fromUtf8(" ✓ ");
             ui->wifi_list->addItem(nwkCnfList[i].name());
         }
     }
@@ -134,18 +128,24 @@ void MainWindow::show_wifi_info()
 void MainWindow::show_hotspot_info()
 {
     ui->wif_list_groupbox->setVisible(false);
+    ui->hotspot_info_groupbox->setVisible(true);
 }
 
 void MainWindow::update_wifi_list()
 {
-    this->show_wifi_info();
+    if(this->current_value == 0)
+    {
+        this->show_wifi_info();
+    }
 }
 
 void MainWindow::connect_selected_wifi()
 {
     QString selected_SSID =  ui->wifi_list->currentItem()->text();
 
-    qDebug() << selected_SSID;
+    // Open new window to enter password.
+    enter_wifi_password* enter_wifi_password_obj = new enter_wifi_password(0, selected_SSID);
+    enter_wifi_password_obj->exec();
 }
 
 
