@@ -2,6 +2,7 @@
 #include "ui_enter_wifi_password.h"
 #include <QFile>
 #include <QTextStream>
+#include <QDebug>
 
 enter_wifi_password::enter_wifi_password(QWidget *parent, QString selected_SSID) :
     QDialog(parent),
@@ -11,6 +12,7 @@ enter_wifi_password::enter_wifi_password(QWidget *parent, QString selected_SSID)
     this->entered_password = "";
     ui->ssid_textbox->setText(selected_SSID);
     this->show_keyboard_group("abc");
+    load_button_event();
 
 }
 
@@ -19,7 +21,32 @@ enter_wifi_password::~enter_wifi_password()
     delete ui;
 }
 
+void enter_wifi_password::load_button_event()
+{
+    // Based on their object name (pushButton_n where n is a number), does not matter
+    // if it exists or not as long as it covers the all the needed button names.
+    int button_count = 140;
 
+    QPushButton *keyboard_buttons[button_count];
+
+    for(int i=0; i<button_count; i++)
+    {
+        QString button_name = "pushButton_" + QString::number(i);
+
+        keyboard_buttons[i] = enter_wifi_password::findChild<QPushButton *>(button_name);
+        connect(keyboard_buttons[i], SIGNAL(released()), this, SLOT(keyboard_clicked()));
+    }
+}
+
+void enter_wifi_password::keyboard_clicked()
+{
+    QPushButton *button =(QPushButton *)sender();
+    QString button_text = button->text();
+
+    ui->password_textbox->setText(button_text);
+
+    qDebug() << button_text;
+}
 
 void enter_wifi_password::on_abc_button_clicked()
 {

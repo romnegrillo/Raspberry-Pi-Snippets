@@ -19,6 +19,8 @@ public:
     void show_keyboard_group(QString group);
     void saveToApSetup(QString ssid, QString passphrase);
     QString getWifSetupValue(QString param);
+    void load_button_event();
+
 
 private slots:
     void on_abc_button_clicked();
@@ -36,6 +38,8 @@ private slots:
     void on_ok_button_clicked();
 
     void on_cancel_button_clicked();
+
+      void keyboard_clicked(); // Manually added.
 
 private:
     Ui::enter_wifi_password *ui;

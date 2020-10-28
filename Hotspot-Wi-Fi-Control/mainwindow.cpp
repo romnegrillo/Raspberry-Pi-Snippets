@@ -17,7 +17,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    load_settings();
+}
 
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::load_settings()
+{
     // This should be read in config file.
     this->current_value = 0; // sample
 
@@ -33,11 +42,6 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         this->show_hotspot_info();
     }
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
 }
 
 void MainWindow::on_horizontalSlider_valueChanged(int next_value)
@@ -143,7 +147,14 @@ void MainWindow::update_wifi_list()
 
 void MainWindow::connect_selected_wifi()
 {
-    QString selected_SSID =  ui->wifi_list->currentItem()->text();
+    QListWidgetItem* selected_SSID_item =  ui->wifi_list->currentItem();
+
+    if(selected_SSID_item == NULL)
+    {
+        return;
+    }
+
+    QString selected_SSID = selected_SSID_item->text();
 
     // Open new window to enter password.
     enter_wifi_password* enter_wifi_password_obj = new enter_wifi_password(0, selected_SSID);

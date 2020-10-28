@@ -58,7 +58,7 @@ public:
     QPushButton *pushButton_8;
     QPushButton *pushButton_20;
     QPushButton *pushButton_16;
-    QPushButton *pushButton;
+    QPushButton *pushButton_135;
     QPushButton *pushButton_19;
     QGroupBox *number_groupbox;
     QPushButton *pushButton_60;
@@ -248,9 +248,9 @@ public:
         pushButton_16 = new QPushButton(abc_groupbox);
         pushButton_16->setObjectName(QString::fromUtf8("pushButton_16"));
         pushButton_16->setGeometry(QRect(330, 50, 60, 40));
-        pushButton = new QPushButton(abc_groupbox);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(10, 10, 60, 40));
+        pushButton_135 = new QPushButton(abc_groupbox);
+        pushButton_135->setObjectName(QString::fromUtf8("pushButton_135"));
+        pushButton_135->setGeometry(QRect(10, 10, 60, 40));
         pushButton_19 = new QPushButton(abc_groupbox);
         pushButton_19->setObjectName(QString::fromUtf8("pushButton_19"));
         pushButton_19->setGeometry(QRect(450, 50, 60, 40));
@@ -541,7 +541,7 @@ public:
         pushButton_8->setText(QApplication::translate("enter_wifi_password", "i", 0, QApplication::UnicodeUTF8));
         pushButton_20->setText(QApplication::translate("enter_wifi_password", "l", 0, QApplication::UnicodeUTF8));
         pushButton_16->setText(QApplication::translate("enter_wifi_password", "h", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("enter_wifi_password", "q", 0, QApplication::UnicodeUTF8));
+        pushButton_135->setText(QApplication::translate("enter_wifi_password", "q", 0, QApplication::UnicodeUTF8));
         pushButton_19->setText(QApplication::translate("enter_wifi_password", "k", 0, QApplication::UnicodeUTF8));
         number_groupbox->setTitle(QApplication::translate("enter_wifi_password", ",", 0, QApplication::UnicodeUTF8));
         pushButton_60->setText(QApplication::translate("enter_wifi_password", "3", 0, QApplication::UnicodeUTF8));

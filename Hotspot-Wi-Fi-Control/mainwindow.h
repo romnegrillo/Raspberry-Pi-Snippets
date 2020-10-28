@@ -15,6 +15,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void load_settings();
     void saveToApSetup(QString ssid, QString passphrase);
     QString getApSetupValue(QString param);
 
