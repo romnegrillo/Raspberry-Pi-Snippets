@@ -33,8 +33,15 @@ void enter_wifi_password::load_button_event()
     {
         QString button_name = "pushButton_" + QString::number(i);
 
-        keyboard_buttons[i] = enter_wifi_password::findChild<QPushButton *>(button_name);
-        connect(keyboard_buttons[i], SIGNAL(released()), this, SLOT(keyboard_clicked()));
+
+        if(enter_wifi_password::findChild<QPushButton *>(button_name))
+        {
+            keyboard_buttons[i] = enter_wifi_password::findChild<QPushButton *>(button_name);
+            keyboard_buttons[i]->setStyleSheet("color: rgb(255,0,0);");
+            connect(keyboard_buttons[i], SIGNAL(released()), this, SLOT(keyboard_clicked()));
+        }
+
+
     }
 }
 
@@ -122,7 +129,7 @@ void enter_wifi_password::on_cancel_button_clicked()
 
 void enter_wifi_password::saveToApSetup(QString ssid, QString passphrase)
 {
-    QFile file("/home/pi/wifisetup.sh");
+    QFile file("scripts/wifisetup.sh");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     { //you can send a message or throw error signal here
         return;
@@ -151,12 +158,12 @@ void enter_wifi_password::saveToApSetup(QString ssid, QString passphrase)
         }
     }
     file.close();
-    QFile fileOut("wifisetup_temp.sh");
+    QFile fileOut("scripts/wifisetup_temp.sh");
     if (fileOut.open(QFile::WriteOnly | QFile::Text))
     {
         QTextStream s(&fileOut);
         for (int i = 0; i < line.size(); ++i)
-          s << line.at(i) << '\n';
+            s << line.at(i) << '\n';
     }
     fileOut.close();
 }
@@ -164,7 +171,7 @@ void enter_wifi_password::saveToApSetup(QString ssid, QString passphrase)
 QString enter_wifi_password::getWifSetupValue(QString param)
 {
     QString retValue = "";
-    QFile file("/home/pi/wifisetup.sh");
+    QFile file("scripts/wifisetup.sh");
     QString line = QString("");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {

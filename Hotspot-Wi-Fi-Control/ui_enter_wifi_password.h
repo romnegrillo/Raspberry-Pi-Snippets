@@ -482,6 +482,7 @@ public:
         pushButton_51 = new QPushButton(ABC_groupbox);
         pushButton_51->setObjectName(QString::fromUtf8("pushButton_51"));
         pushButton_51->setGeometry(QRect(10, 10, 60, 40));
+        pushButton_51->setStyleSheet(QString::fromUtf8(""));
         pushButton_52 = new QPushButton(ABC_groupbox);
         pushButton_52->setObjectName(QString::fromUtf8("pushButton_52"));
         pushButton_52->setGeometry(QRect(450, 50, 60, 40));

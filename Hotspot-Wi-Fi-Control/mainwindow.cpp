@@ -176,7 +176,7 @@ void MainWindow::saveToApSetup(QString ssid, QString passphrase)
      A reboot is required for it to take effect as of the moment.
     */
 
-    QFile file("/home/pi/apsetup.sh");
+    QFile file("scripts/apsetup.sh");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     { //you can send a message or throw error signal here
         return;
@@ -205,7 +205,7 @@ void MainWindow::saveToApSetup(QString ssid, QString passphrase)
         }
     }
     file.close();
-    QFile fileOut("apsetup_temp.sh");
+    QFile fileOut("scripts/apsetup_temp.sh");
     if (fileOut.open(QFile::WriteOnly | QFile::Text))
     {
         QTextStream s(&fileOut);
@@ -229,7 +229,7 @@ QString MainWindow::getApSetupValue(QString param)
     */
 
     QString retValue = "";
-    QFile file("/home/pi/apsetup.sh");
+    QFile file("scripts/apsetup.sh");
     QString line = QString("");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {

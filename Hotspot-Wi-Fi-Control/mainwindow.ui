@@ -183,7 +183,7 @@ QSlider::handle:horizontal {
       </rect>
      </property>
      <property name="text">
-      <string>G3D-T2000</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="hotspot_password_textbox">
@@ -196,7 +196,7 @@ QSlider::handle:horizontal {
       </rect>
      </property>
      <property name="text">
-      <string>G3D-T2000</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="label_4">

@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../enter_wifi_password.h"
+#include "../enter_wifi_password.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'enter_wifi_password.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
