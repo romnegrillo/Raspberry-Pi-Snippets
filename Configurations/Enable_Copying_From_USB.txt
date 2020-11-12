@@ -1,0 +1,2 @@
+Run the command:
+- sudo apt-get install ntfs-3g 

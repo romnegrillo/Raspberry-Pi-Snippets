@@ -1,0 +1,21 @@
+Reference: https://www.raspberrypi.org/learning/networking-lessons/rpi-static-ip-address/
+
+Edit the file dhcpcd.conf.
+
+sudo nano /etc/dhcpcd.conf
+
+Then add the following sample lines to add static ip in the internet port and wifi.
+
+interface eth0
+
+static ip_address=192.168.137.10/24
+static routers=192.168.137.1
+static domain_name_servers=192.168.137.1
+
+interface wlan0
+
+static ip_address=192.168.0.2/24
+static routers=192.168.0.1
+static domain_name_servers=192.168.0.1
+
+Save and exit.

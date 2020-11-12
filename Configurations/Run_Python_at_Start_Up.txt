@@ -1,0 +1,12 @@
+For Raspbian Stretch edit the file by running the command:
+- nano ~/.config/lxsession/LXDE-pi/autostart
+
+For Raspbian Buster edit the file by running the command:
+- nano /etc/xdg/lxsession/LXDE-pi/autostart
+
+Add sa huling text dun sa file yung python command with absolute directory. Wag kalimutan "&", indicates na magrun yung command mo sa separate process, di magboboot RPi pag wala yung "&".
+
+Example:
+- @python3 /home/pi/Desktop/SampleGUI.py &
+
+ 
